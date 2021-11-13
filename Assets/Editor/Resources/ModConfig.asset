@@ -19,4 +19,4 @@ MonoBehaviour:
     contains like over 100 mp3s. The filesize is very large.\n\nHoldable by Danny7007"
   version: 1.0.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: df1563e0eb4a4dd4cb58ad5fbf852852, type: 3}
+  previewImage: {fileID: 2800000, guid: 09fd08d520c3ec941a8f715a52d5d4ca, type: 3}

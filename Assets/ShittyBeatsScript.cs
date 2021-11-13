@@ -38,22 +38,13 @@ public class ShittyBeatsScript : MonoBehaviour {
     private int[] shuffleOrder;
     private int shufflePointer;
     private const string marqueeMessage = "                      --LISTEN TO SHITTY BEATS TO RELAX / EFM TO TODAY!--   bit.ly/3a1eaeK                       ";
-    private const int marqueeLimit = 20;
-    private const int titleLimit = 18;
+    private const int MARQUEE_LIMIT = 20;
+    private const int TITLE_LIMIT = 18;
 
     private int currentSongIx;
 
-    IEnumerator WaitForLoaded()
+    void Awake () 
     {
-        yield return null;
-        Debug.Log("[Shitty Beats Holdable] Waiting period started.");
-        songTitle.text = "LOADING AUDIO...";
-        while (tracks.Any(x => x == null || x.loadState != AudioDataLoadState.Loaded))
-            yield return new WaitForSeconds(0.1f);
-        Debug.Log("[Shitty Beats Holdable] Finished loading.");
-        Initiate();
-    }
-    void Initiate () {
         currentSongIx = Rnd.Range(0, tracks.Length);
         audioPlayer.volume = volume / 10;
         Debug.Log("[Shitty Beats Holdable] ACTIVATED");
@@ -68,7 +59,6 @@ public class ShittyBeatsScript : MonoBehaviour {
     }
     void Start()
     {
-        StartCoroutine(WaitForLoaded());
         StartCoroutine(ScrollMarquee());
         UpdateVolume();
         UpdateSelected();
@@ -78,9 +68,9 @@ public class ShittyBeatsScript : MonoBehaviour {
     {
         while (true)
         {
-            for (int i = 0; i < marqueeMessage.Length - marqueeLimit; i++)
+            for (int i = 0; i < marqueeMessage.Length - MARQUEE_LIMIT; i++)
             {
-                marquee.text = marqueeMessage.Substring(i, marqueeLimit);
+                marquee.text = marqueeMessage.Substring(i, MARQUEE_LIMIT);
                 yield return new WaitForSeconds(0.1f);
             }
         }
@@ -188,7 +178,7 @@ public class ShittyBeatsScript : MonoBehaviour {
         number.text = (currentSongIx + 1).ToString().PadLeft(2, '0');
         audioPlayer.clip = tracks[currentSongIx];
         string title = audioPlayer.clip.name;
-        songTitle.text = FormatPara(title.Split(' '), titleLimit);
+        songTitle.text = FormatPara(title.Split(' '), TITLE_LIMIT);
 
         bool wasPlaying = false;
         if (currentState == Status.Playing)
@@ -199,6 +189,7 @@ public class ShittyBeatsScript : MonoBehaviour {
         audioPlayer.clip = tracks[currentSongIx];
         if (wasPlaying)
             audioPlayer.Play();
+        Debug.LogFormat("[Shitty Beats Holdable] Playing song {0}.", audioPlayer.clip.name);
     }
     void Update()
     {
