@@ -37,7 +37,7 @@ public class ShittyBeatsScript : MonoBehaviour {
     private float volume = 5;
     private int[] shuffleOrder;
     private int shufflePointer;
-    private const string marqueeMessage = "                      --LISTEN TO SHITTY BEATS TO RELAX / EFM TO TODAY!--   bit.ly/3a1eaeK                       ";
+    private const string marqueeMessage = "                      --LISTEN TO SHITTY BEATS TO RELAX / BALL TO TODAY!--   bit.ly/3a1eaeK                       ";
     private const int MARQUEE_LIMIT = 20;
     private const int TITLE_LIMIT = 18;
 
